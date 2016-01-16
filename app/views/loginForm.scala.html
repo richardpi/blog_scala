@@ -1,0 +1,38 @@
+@(loginForm: Form[(String, String)])(implicit flash: play.api.mvc.Flash, session: play.api.mvc.Session)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@main(session) {
+
+@flash.get("message").map { message =>
+<div class="alert-message danger">
+    @message
+</div>
+}
+
+<h1>Login</h1>
+
+    @form(routes.Auth.authenticate()) {
+
+    @if(loginForm.hasGlobalErrors) {
+    <ul class="alert-message danger">
+        @for(error <- loginForm.globalErrors) {
+        <li style="color: #fff;">@error.message</li>
+        }
+    </ul>
+    }
+
+    <fieldset>
+        @inputText(loginForm("username"), '_label -> "Username")
+        @inputText(loginForm("password"), '_label -> "Password")
+    </fieldset>
+
+    <div class="actions">
+        <input type="submit" value="Login" class="btn primary">
+    </div>
+
+    }
+
+}

@@ -1,0 +1,33 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+#login
+GET    /auth/login                   controllers.Auth.login
+POST   /auth/login                   controllers.Auth.authenticate
+
+#logout
+GET    /auth/logout                  controllers.Auth.logout
+
+#list post
+GET    /admin/posts                  controllers.Application.list
+
+#Add post
+GET    /admin/posts/new              controllers.Application.create
+POST   /admin/posts                  controllers.Application.save
+
+# Edit existing posts
+GET    /admin/posts/:id          controllers.Application.edit(id:Long)
+POST   /admin/posts/:id          controllers.Application.update(id:Long)
+
+# Delete a post
+POST   /admin/posts/:id/delete   controllers.Application.delete(id:Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET    /assets/*file           controllers.Assets.at(path="/public", file)
+
+
+######## frontend
+GET    /                       controllers.Frontend.list
+GET    /posts/:id              controllers.Frontend.view(id:Long)
+GET    /about                  controllers.Frontend.about

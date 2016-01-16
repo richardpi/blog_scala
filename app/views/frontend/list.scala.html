@@ -1,0 +1,26 @@
+@(page: Seq[Post])
+
+@main {
+
+    @Seq(page).map { posts =>
+
+        @posts.map { post =>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-preview">
+                        <a href="@routes.Frontend.view(post.id.get)">
+                            <h2 class="post-title">
+                                @post.title
+                            </h2>
+                            <h3 class="post-subtitle">
+                                @post.intro
+                            </h3>
+                        </a>
+                        <p class="post-meta">Posted by @post.author on @post.date.format("dd/MM/yyyy")</p>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        }
+    }
+}

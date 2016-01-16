@@ -1,0 +1,46 @@
+@(page: Seq[Post])(implicit flash: play.api.mvc.Flash, session: play.api.mvc.Session)
+
+@main(session) {
+
+@flash.get("success").map { message =>
+<div class="alert-message warning">
+	<strong>Done!</strong> @message
+</div>
+}
+
+<div id="actions">
+    <a class="btn success" id="add" href="@routes.Application.create()">Add new post</a>
+</div>
+
+@Seq(page).map { posts =>
+
+<h2>List of posts</h2>
+
+<table class="table table-striped">
+
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Intro</th>
+        <th>Content</th>
+    </tr>
+    </thead>
+
+	<tbody>
+		@posts.map { post =>
+
+		<tr>
+			<td><a href="@routes.Application.edit(post.id.get)">@post.title</a></td>
+			<td>@post.date.format("dd/MM/yyyy")</td>
+			<td>@post.intro</td>
+			<td>@post.content.get.take(200) @if(post.content.get.length > 200) {......}</td>
+		</tr>
+
+		}
+
+	</tbody>
+</table>
+
+
+} }

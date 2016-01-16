@@ -1,0 +1,33 @@
+@(postForm: Form[Post], author: String)(implicit session: play.api.mvc.Session)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) } 
+
+@main(session) {
+    
+    <h1>Add a post</h1>
+       
+    @form(routes.Application.save()) {
+        
+        <fieldset>
+        
+            @inputText(postForm("title"), '_label -> "Title")
+            @inputText(postForm("date"), '_label -> "Date")
+            @inputText(postForm("intro"), '_label -> "Intro")
+            @textarea(postForm("content"), '_label -> "Content", 'class -> "blog-textarea")
+
+            @helper.input(postForm("author")) { (id, name, value, args) =>
+            <input type="text" name="@name" id="@id" value="@author" @toHtmlArgs(args)>
+            }
+
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Add this post" class="btn primary"> or
+           <a href=@routes.Application.list() class="btn">Cancel</a>
+        </div>
+        
+    }
+    
+}
