@@ -3,7 +3,7 @@
 
 # --- !Ups
 
-create table "POSTS" ("id" BIGSERIAL NOT NULL PRIMARY KEY,"title" VARCHAR(254) NOT NULL, "date" BIGINT NOT NULL,"intro" VARCHAR(2000),"content" VARCHAR(5000),"author" VARCHAR(100));
+create table "POSTS" ("id" BIGSERIAL NOT NULL PRIMARY KEY,"title" VARCHAR(254) NOT NULL, "date" BIGINT NOT NULL,"intro" VARCHAR(2000),"content" VARCHAR(10000),"author" VARCHAR(100));
 
 # --- !Downs
 
